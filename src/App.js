@@ -2,11 +2,13 @@ import React from "react";
 
 import './App.css';
 import AlbumFeature from './features/Album';
+import ColorBox from "./components/ColorBox";
 
 function App() {
   return (
     <div className="App">
-      <AlbumFeature></AlbumFeature>
+      <ColorBox color="yellow"></ColorBox>
+      <ColorBox color="black"></ColorBox>
     </div>
   );
 }

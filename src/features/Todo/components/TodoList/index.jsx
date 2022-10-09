@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 TodoList.propTypes = {
     todoList: PropTypes.array
@@ -14,7 +15,12 @@ function TodoList(props) {
     return (
         <ul>
             {todoList.map(todo => (
-                <li key={todo.id}> {todo.title} </li>
+                <li key={todo.id}
+                    className={classnames({
+                        completed: todo.satus == 'completed',
+                        new: todo.satus == 'new'
+                    })}
+                > {todo.title} </li>
             ))}
         </ul>
     );

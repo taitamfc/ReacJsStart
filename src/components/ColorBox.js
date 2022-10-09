@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
 function ColorBox(props) {
     const { color, rounded } = props;
+    const [colorChange, setColorChange] = useState(false);
     return (
         <div className="box" style={{
-            backgroundColor: color,
+            backgroundColor: colorChange ? colorChange : color,
             borderRadius: (rounded) ? '10px' : ''
-        }}></div>
+        }}>
+            <button onClick={() => setColorChange('red')}>Change Color</button>
+        </div>
     )
 }
 
