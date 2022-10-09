@@ -1,14 +1,12 @@
 import React from "react";
 
 import './App.css';
-import AlbumFeature from './features/Album';
-import ColorBox from "./components/ColorBox";
+import TodoFeature from './features/Todo';
 
 function App() {
   return (
     <div className="App">
-      <ColorBox color="yellow"></ColorBox>
-      <ColorBox color="black"></ColorBox>
+      <TodoFeature></TodoFeature>
     </div>
   );
 }

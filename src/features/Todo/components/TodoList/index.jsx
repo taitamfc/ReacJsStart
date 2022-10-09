@@ -3,26 +3,37 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 TodoList.propTypes = {
-    todoList: PropTypes.array
+    todoList: PropTypes.array,
+    onTodoClick: PropTypes.func
 };
 
 TodoList.defaultProps = {
-    todoList: []
+    todoList: [],
+    onTodoClick: null
 }
 
 function TodoList(props) {
-    const { todoList } = props;
+    const { todoList, onTodoClick } = props;
+    const handleTodoClick = (todo, idx) => {
+        if (onTodoClick) {
+            onTodoClick(todo, idx);
+        }
+    }
     return (
-        <ul>
-            {todoList.map(todo => (
-                <li key={todo.id}
-                    className={classnames({
-                        completed: todo.satus == 'completed',
-                        new: todo.satus == 'new'
-                    })}
-                > {todo.title} </li>
-            ))}
-        </ul>
+        <>
+            <ul>
+                {todoList.map((todo, idx) => (
+                    <li key={todo.id}
+                        className={classnames({
+                            'todo-item': true,
+                            completed: todo.status == 'completed',
+                            new: todo.status == 'new'
+                        })}
+                        onClick={() => handleTodoClick(todo, idx)}
+                    > {todo.title} </li>
+                ))}
+            </ul>
+        </>
     );
 }
 

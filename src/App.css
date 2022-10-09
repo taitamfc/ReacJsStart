@@ -12,3 +12,14 @@
 .box img {
   width: 100%;
 }
+
+.todo-item {
+  display: block;
+  background: green;
+  margin-bottom: 5px;
+  width: 200px;
+}
+
+.completed {
+  background: #ccc;
+}
