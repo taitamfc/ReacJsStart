@@ -8,3 +8,7 @@
   margin: 10px;
   border: 1px solid #ccc;
 }
+
+.box img {
+  width: 100%;
+}
