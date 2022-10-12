@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TouchList from './../../components/TodoList';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import queryString from 'query-string';
 
 ListPage.propTypes = {};
 
@@ -23,8 +25,14 @@ function ListPage(props) {
         }
     ];
 
+    const location = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [todoList, setTodoList] = useState(initTodoList);
-    const [filterStatus, setFilterStatus] = useState('all');
+    // const [filterStatus, setFilterStatus] = useState(() => {
+    //     return searchParams.get('status') || 'all';
+    //     const params = queryString.parse(location.search);
+    //     return params.status || 'all';
+    // });
 
     const handleTodoClick = (todo, idx) => {
         // clone array,object before change
@@ -41,20 +49,24 @@ function ListPage(props) {
     }
 
     const handleShowAll = () => {
-        setFilterStatus('all');
+        setSearchParams({ status: 'all' });
+        // setFilterStatus('all');
     }
     const handleShowCompleted = () => {
-        setFilterStatus('completed');
+        setSearchParams({ status: 'completed' });
+        // setFilterStatus('completed');
     }
     const handleShowNew = () => {
-        setFilterStatus('new');
+        setSearchParams({ status: 'new' });
+        // setFilterStatus('new');
     }
 
     const renderTodoList = todoList.filter(todo => {
-        if (filterStatus == 'all') {
+        let theFilterStatus = searchParams.get('status');
+        if (theFilterStatus == 'all') {
             return true;
         } else {
-            return todo.status == filterStatus;
+            return todo.status == theFilterStatus;
         }
     });
 
@@ -63,9 +75,9 @@ function ListPage(props) {
             <h3>To Do List</h3>
             <TouchList todoList={renderTodoList} onTodoClick={handleTodoClick}></TouchList>
             <div>
-                <button onClick={handleShowAll}>Show All</button>
-                <button onClick={handleShowCompleted}>Show Completed</button>
-                <button onClick={handleShowNew}>Show New</button>
+                <button onClick={() => { setSearchParams({ status: 'all' }) }}>Show All</button>
+                <button onClick={() => { setSearchParams({ status: 'completed' }) }}>Show Completed</button>
+                <button onClick={() => { setSearchParams({ status: 'new' }) }}>Show New</button>
             </div>
         </div>
     );
