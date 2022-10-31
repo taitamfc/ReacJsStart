@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TouchList from './../../components/TodoList';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import queryString from 'query-string';
+import TodoForm from '../../components/TodoForm';
 
 ListPage.propTypes = {};
 
@@ -70,8 +71,23 @@ function ListPage(props) {
         }
     });
 
+    const handleTodoFormSubmit = (values) => {
+        console.log('handleTodoFormSubmit',values);
+        const newTodo = {
+            id:todoList.length + 1,
+            title: values.title,
+            status: 'new'
+        }
+
+        // set state
+        const newTodoList = [...todoList,newTodo];
+        setTodoList(newTodoList);
+    }
+
     return (
         <div>
+            <h3>To Do Form</h3>
+            <TodoForm onParentSubmit={handleTodoFormSubmit}></TodoForm>
             <h3>To Do List</h3>
             <TouchList todoList={renderTodoList} onTodoClick={handleTodoClick}></TouchList>
             <div>
